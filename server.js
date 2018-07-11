@@ -17,7 +17,6 @@ app.get('/teams', (req,res) => {
 app.post('/teams', (req,res) => {
     var id=uuid();
     var matches = [];
-    matches.push(req.body.matches);
     console.log(matches);
     teams.push({"id" : id, "name" : req.body.name, "is_still_in" : req.body.is_still_in, "matches" : matches});
     res.json({"id" : id, "name" : req.body.name, "is_still_in" : req.body.is_still_in, "matches" : matches});
@@ -37,7 +36,6 @@ app.get('/teams/:id', (req,res) => {
 app.put('/teams/:id', (req,res) => {
     var id = req.params.id;
     var matches = [];
-    matches.push(req.body.matches);
     var index = teams.findIndex(item => {return item.id == id});
     if (index != -1) {
         var param = teams[index].id;
