@@ -1,0 +1,220 @@
+swagger: '2.0'
+info:
+  version: '1.0'
+  title: "triboli-luglio-MondialCup"
+  description: 'API per inserire, cercare e modificare le partite e gli incontri dei mondiali nel nostro database.'
+host: polls.apiblueprint.org
+basePath: /api
+schemes:
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+  
+
+  
+paths:
+  '/teams':
+    x-summary: Add and obtain information about teams
+    get:
+      description: 'Ottieni informazioni di tutte le squadre'
+      summary: 'Show teams in database'
+      parameters: 
+        - name: name
+          in: query
+          description: name of the team you want to search. Not required.
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: string
+          examples:
+            application/json: |-
+              [
+                  {
+                      "id": "4c27e778-ccb3-4f56-a012-1efe8e06bdce",
+                      "name": "Croazia",
+                      "is_still_in": "true"
+                      "matches": "[(Belgio, w),(Italia, l)]"
+                  },
+                  {
+                      "id": "4c27e778-ccb3-4f56-a012-1ee8e06y4hce",
+                      "name": "Italia",
+                      "is_still_in": "false"
+                      "matches": "[(Germania, w),(Francia, l)]"
+                  }
+              ]
+    
+    post:
+      description: 'Aggiungi team nel database.'
+      summary: 'Add team in database'
+      parameters: 
+        - name: name
+          in: body
+          description: Team to add in database
+          required: true
+          "schema": {
+              "$ref": "#/definitions/team"
+          }
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: string
+          examples:
+            application/json: |-
+              [
+                  {
+                      "id": "4c27e778-ccb3-4f56-a012-1efe8e06bdce",
+                      "name": "Croazia",
+                      "is_still_in": "true"
+                      "matches": "[(Belgio, w),(Italia, l)]"
+                  }
+              ]
+    
+        
+  '/teams/{id}':
+    x-summary: Update information of teams
+    put:
+      description: 'Update data of a team'
+      summary: Update information of team
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+          description: ID of the team
+        - name: information
+          in: body
+          required: true
+          description: "Information to update"
+          "schema": {
+              "$ref": "#/definitions/team"
+          }
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: object
+          examples: 
+            application/json: |-
+              [
+                  {
+                      "id": "4c27e778-ccb3-4f56-a012-1efe8e06bdce",
+                      "name": "Croazia",
+                      "is_still_in": "false"
+                      "matches": "[(Belgio, w),(Italia, l)]"
+                  }
+              ]
+        '404':
+          description: ''
+          schema:
+            type: object
+          examples: 
+            application/json: |-
+              Not Found
+    get:
+      description: 'Obtain information about a team using IDs.'
+      summary: Obtain specific team using ID
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+          description: username of the team
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: object
+          examples: 
+            application/json: |-
+              [
+                  {
+                      "id": "4c27e778-ccb3-4f56-a012-1efe8e06bdce",
+                      "name": "Croazia",
+                      "is_still_in": "false"
+                      "matches": "[(Belgio, w),(Italia, l)]"
+                  }
+              ]
+        '404':
+          description: ''
+          schema:
+            type: object
+          examples: 
+            application/json: |-
+              Not Found
+              
+              
+  '/matches':
+    x-summary: Add and obtain information about matches
+    get:
+      description: 'Ottieni informazioni di tutti gli incontri'
+      summary: 'Show matches in database'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: string
+          examples:
+            application/json: |-
+              [
+                  {
+                      "id": "4c27e778-ccb3-4f56-a012-1efe8e06bdce",
+                      "name": "Croazia",
+                      "is_still_in": "true"
+                      "matches": "[(Belgio, w),(Italia, l)]"
+                  },
+                  {
+                      "id": "4c27e778-ccb3-4f56-a012-1ee8e06y4hce",
+                      "name": "Italia",
+                      "is_still_in": "false"
+                      "matches": "[(Germania, w),(Francia, l)]"
+                  }
+              ]
+    
+          
+"definitions": {
+    "team": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "name of team"
+        },"is_still_in": {
+          "type": "boolean",
+          "description": "True if team is still in, false otherwise"
+        },
+        "matches": {
+          "type": array,
+          "description": "array of the done matches"
+        }
+      }
+    },
+    "match": {
+      "type": "object",
+      "properties": {
+        "opponent": {
+          "type": "string",
+          "description": "name of the opponent team"
+        },
+        "outcome": {
+          "type": string,
+          "description": "w if win, l if lost and d if draw"
+        }
+      }
+    }
+}
