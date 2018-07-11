@@ -25,7 +25,6 @@ app.get('/teams/:id', (req,res) => {
     }
 });
 
-
 app.post('/teams', (req,res) => {
     var id=uuid();
     var matches = [req.body.matches];
@@ -46,12 +45,6 @@ app.put('/teams/:id', (req,res) => {
         res.sendStatus(404);
     }
 });
-
-
-app.get('/matches', (req,res) => {
-    res.json(matches);
-});
-
 
 app.listen(port);
 console.log("Listen to port " + port);
