@@ -156,6 +156,35 @@ paths:
             application/json: |-
               Not Found
               
+              
+  '/matches':
+    x-summary: Insert a match
+    post:
+      description: 'Insert data of a match'
+      summary: Insert data of a match
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: object
+          examples: 
+            application/json: |-
+              [
+                  {
+                    "opponent": "Italia",
+                    "outcome": "L"
+                  }
+              ]
+        '404':
+          description: ''
+          schema:
+            type: object
+          examples: 
+            application/json: |-
+              Not Found
+              
           
 "definitions": {
     "team": {
