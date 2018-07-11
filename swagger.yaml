@@ -122,6 +122,70 @@ paths:
           examples: 
             application/json: |-
               Not Found
+    get:
+      description: 'Obtain information about a team using IDs.'
+      summary: Obtain specific team using ID
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+          description: username of the team
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: object
+          examples: 
+            application/json: |-
+              [
+                  {
+                      "id": "4c27e778-ccb3-4f56-a012-1efe8e06bdce",
+                      "name": "Croazia",
+                      "is_still_in": "false"
+                      "matches": "[(Belgio, w),(Italia, l)]"
+                  }
+              ]
+        '404':
+          description: ''
+          schema:
+            type: object
+          examples: 
+            application/json: |-
+              Not Found
+              
+              
+  '/matches':
+    x-summary: Add and obtain information about matches
+    get:
+      description: 'Ottieni informazioni di tutti gli incontri'
+      summary: 'Show matches in database'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: string
+          examples:
+            application/json: |-
+              [
+                  {
+                      "id": "4c27e778-ccb3-4f56-a012-1efe8e06bdce",
+                      "name": "Croazia",
+                      "is_still_in": "true"
+                      "matches": "[(Belgio, w),(Italia, l)]"
+                  },
+                  {
+                      "id": "4c27e778-ccb3-4f56-a012-1ee8e06y4hce",
+                      "name": "Italia",
+                      "is_still_in": "false"
+                      "matches": "[(Germania, w),(Francia, l)]"
+                  }
+              ]
+    
           
 "definitions": {
     "team": {
