@@ -47,5 +47,15 @@ app.put('/teams/:id', (req,res) => {
     }
 });
 
+app.post('/matches', (req,res) => {
+    console.log(matches);
+    var squadra = req.body.opponent;
+    matches.push({"opponent" : req.body.opponent, "outcome" : req.body.outcome});
+    var index = teams.findIndex(item => {return item.name == squadra});
+    teams.push({"matches" : matches});
+    res.json({"id" : id, "name" : req.body.name, "is_still_in" : req.body.is_still_in, "matches" : matches});
+});
+
+
 app.listen(port);
 console.log("Listen to port " + port);
