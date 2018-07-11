@@ -17,7 +17,6 @@ app.get('/teams', (req,res) => {
 app.post('/teams', (req,res) => {
     var id=uuid();
     var matches = [];
-    console.log(matches);
     teams.push({"id" : id, "name" : req.body.name, "is_still_in" : req.body.is_still_in, "matches" : matches});
     res.json({"id" : id, "name" : req.body.name, "is_still_in" : req.body.is_still_in, "matches" : matches});
 });
@@ -48,12 +47,20 @@ app.put('/teams/:id', (req,res) => {
 });
 
 app.post('/matches', (req,res) => {
-    console.log(matches);
-    var squadra = req.body.opponent;
+    var matches = [];
     matches.push({"opponent" : req.body.opponent, "outcome" : req.body.outcome});
-    var index = teams.findIndex(item => {return item.name == squadra});
-    teams.push({"matches" : matches});
-    res.json({"id" : id, "name" : req.body.name, "is_still_in" : req.body.is_still_in, "matches" : matches});
+    console.log(matches);
+    //var squadra = req.body.opponent;
+    var index = teams.findIndex(item => {return item.name == req.body.opponent});
+    console.log(index);
+    if (index != -1) {
+        var param = teams[index].id;
+        teams[index].matches = matches;
+        res.json(teams[index])
+    }
+    else {
+        res.sendStatus(404);
+    }
 });
 
 
