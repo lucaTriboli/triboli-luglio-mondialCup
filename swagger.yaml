@@ -156,36 +156,6 @@ paths:
             application/json: |-
               Not Found
               
-              
-  '/matches':
-    x-summary: Add and obtain information about matches
-    get:
-      description: 'Ottieni informazioni di tutti gli incontri'
-      summary: 'Show matches in database'
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: ''
-          schema:
-            type: string
-          examples:
-            application/json: |-
-              [
-                  {
-                      "id": "4c27e778-ccb3-4f56-a012-1efe8e06bdce",
-                      "name": "Croazia",
-                      "is_still_in": "true"
-                      "matches": "[(Belgio, w),(Italia, l)]"
-                  },
-                  {
-                      "id": "4c27e778-ccb3-4f56-a012-1ee8e06y4hce",
-                      "name": "Italia",
-                      "is_still_in": "false"
-                      "matches": "[(Germania, w),(Francia, l)]"
-                  }
-              ]
-    
           
 "definitions": {
     "team": {
@@ -201,19 +171,6 @@ paths:
         "matches": {
           "type": array,
           "description": "array of the done matches"
-        }
-      }
-    },
-    "match": {
-      "type": "object",
-      "properties": {
-        "opponent": {
-          "type": "string",
-          "description": "name of the opponent team"
-        },
-        "outcome": {
-          "type": string,
-          "description": "w if win, l if lost and d if draw"
         }
       }
     }
