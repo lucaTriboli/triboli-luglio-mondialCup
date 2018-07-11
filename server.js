@@ -51,7 +51,7 @@ app.post('/matches', (req,res) => {
     matches.push({"opponent" : req.body.opponent, "outcome" : req.body.outcome});
     console.log(matches);
     //var squadra = req.body.opponent;
-    var index = teams.findIndex(item => {return item.name == req.body.opponent});
+    var index = teams.findIndex(item => {return item.name == req.body.team});
     console.log(index);
     if (index != -1) {
         var param = teams[index].id;
