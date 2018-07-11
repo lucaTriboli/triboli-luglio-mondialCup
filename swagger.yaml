@@ -3,8 +3,8 @@ info:
   version: '1.0'
   title: "triboli-luglio-MondialCup"
   description: 'API per inserire, cercare e modificare le partite e gli incontri dei mondiali nel nostro database.'
-host: polls.apiblueprint.org
-basePath: /api
+host: triboli-luglio-mondialcup.herokuapp.com
+basePath: /
 schemes:
   - https
 consumes:
